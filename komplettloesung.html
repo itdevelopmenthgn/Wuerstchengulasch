@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Würstchengulaschland – Komplettlösung</title>
+<style>
+  :root {
+    --bg: #0c0f0a;
+    --paper: #111610;
+    --ink: #cfe8c4;
+    --dim: #86a37c;
+    --accent: #ffd75e;
+    --warn: #ff8a6b;
+    --rule: #2f4a2a;
+    --code: #162013;
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #efe9d3;
+      --paper: #f8f3df;
+      --ink: #1d2a17;
+      --dim: #55664b;
+      --accent: #8a5a00;
+      --warn: #a8341a;
+      --rule: #b7ae8a;
+      --code: #ece5c9;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "SF Mono", Menlo, Consolas, "Courier New", monospace;
+    font-size: 15px;
+    line-height: 1.55;
+  }
+  .page {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 24px 16px 80px;
+    background: var(--paper);
+    min-height: 100vh;
+    border-left: 1px solid var(--rule);
+    border-right: 1px solid var(--rule);
+  }
+  pre.banner {
+    color: var(--accent);
+    font-size: clamp(8px, 2.1vw, 15px);
+    line-height: 1.15;
+    margin: 0 0 8px;
+    overflow-x: auto;
+  }
+  h1, h2, h3 { font-weight: 700; margin: 0; }
+  h1 { color: var(--accent); font-size: 1.5em; letter-spacing: 0.04em; }
+  h2 {
+    color: var(--accent);
+    font-size: 1.2em;
+    margin-top: 42px;
+    padding-top: 8px;
+    border-top: 2px double var(--rule);
+  }
+  h3 { font-size: 1em; margin-top: 24px; color: var(--ink); }
+  h3::before { content: "» "; color: var(--accent); }
+  p { margin: 8px 0; }
+  .meta { color: var(--dim); font-size: 0.9em; }
+  .spoiler-box {
+    border: 2px solid var(--warn);
+    color: var(--warn);
+    padding: 10px 14px;
+    margin: 16px 0;
+  }
+  .toc { margin: 8px 0 0; padding: 0; list-style: none; }
+  .toc li { margin: 2px 0; }
+  a { color: var(--accent); text-underline-offset: 3px; }
+  ol, ul { padding-left: 1.5em; margin: 6px 0; }
+  li { margin: 3px 0; }
+  code, .item {
+    background: var(--code);
+    padding: 0 4px;
+    border: 1px solid var(--rule);
+    white-space: nowrap;
+  }
+  .tip {
+    border-left: 4px solid var(--accent);
+    background: var(--code);
+    padding: 8px 12px;
+    margin: 10px 0;
+  }
+  .tip b { color: var(--accent); }
+  .opt { color: var(--dim); font-style: italic; }
+  table { border-collapse: collapse; width: 100%; margin: 10px 0; font-size: 0.93em; }
+  th, td { border: 1px solid var(--rule); padding: 5px 8px; text-align: left; vertical-align: top; }
+  th { color: var(--accent); background: var(--code); }
+  .scroll { overflow-x: auto; }
+  .footer { margin-top: 56px; color: var(--dim); font-size: 0.85em; border-top: 2px double var(--rule); padding-top: 12px; }
+  .hide-spoiler {
+    background: var(--ink);
+    color: var(--ink);
+    cursor: pointer;
+    padding: 0 4px;
+  }
+  .hide-spoiler:hover, .hide-spoiler.open { background: transparent; color: var(--ink); }
+  @media print {
+    body { background: #fff; color: #000; }
+    .page { border: none; background: #fff; }
+    h1, h2, .banner, a { color: #000; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+<pre class="banner" aria-label="Würstchengulaschland">
+ __        ___   _ _____ ____ _____ ____ _   _ _____ _   _
+ \ \      / / | | |  ___/ ___|_   _/ ___| | | | ____| \ | |
+  \ \ /\ / /| | | | |_  \___ \ | || |   | |_| |  _| |  \| |
+   \ V  V / | |_| |  _|  ___) || || |___|  _  | |___| |\  |
+    \_/\_/   \___/|_|   |____/ |_| \____|_| |_|_____|_| \_|
+        G U L A S C H L A N D  -  K O M P L E T T L Ö S U N G
+</pre>
+
+<h1>WÜRSTCHENGULASCHLAND – DAS SPIEL</h1>
+<p class="meta">Komplettlösung &middot; Version 1.0 &middot; für das Point-&amp;-Click-Adventure mit Samuel, Jens und dem Dill</p>
+
+<div class="spoiler-box">
+  <b>ACHTUNG, SPOILER!</b> Diese Lösung verrät <u>alles</u>, auch das Ende.
+  Wer nur einen Hinweis braucht: im Spiel gibt es sechs <b>TOP-SECRET-Tickets</b>.
+  Der Agent im Empfang der Geheimdienstzentrale löst sie ein (er ist dabei nur ein bisschen gemein).
+</div>
+
+<h2>INHALT</h2>
+<ul class="toc">
+  <li><a href="#a0">[0] Bedienung &amp; allgemeine Tipps</a></li>
+  <li><a href="#a1">[1] Das Heimatdorf (Räume 1–5)</a></li>
+  <li><a href="#a2">[2] Die Geheimdienstzentrale (Räume 6–10)</a></li>
+  <li><a href="#a3">[3] Dillinaland (Räume 11–15)</a></li>
+  <li><a href="#a4">[4] Der Senfwald (Räume 16–20)</a></li>
+  <li><a href="#a5">[5] Elanas Maschine</a></li>
+  <li><a href="#a6">[6] Der Heilige Teich &amp; das Finale (Räume 21–24)</a></li>
+  <li><a href="#a7">[7] Die sechs Tickets</a></li>
+  <li><a href="#a8">[8] Gegenstände auf einen Blick</a></li>
+  <li><a href="#a9">[9] Jens-Nebenquests &amp; Gags</a></li>
+  <li><a href="#a10">[10] Häufige Fragen</a></li>
+  <li><a href="#a11">[11] Das Ende &amp; die Lateinarbeit</a></li>
+</ul>
+
+<!-- ============================================================ -->
+<h2 id="a0">[0] BEDIENUNG &amp; ALLGEMEINE TIPPS</h2>
+<p>Unten im Bild stehen neun Verben: <code>Gib</code> <code>Öffne</code> <code>Schließe</code> <code>Nimm</code> <code>Betrachte</code> <code>Rede mit</code> <code>Benutze</code> <code>Drücke</code> <code>Ziehe</code>. Mit <code>Esc</code> öffnen Sie das Pausemenü (Speichern, Laden, Einstellungen). <code>F5</code>/<code>F9</code> sind Schnellspeichern/-laden.</p>
+<ul>
+  <li><b>Kombinieren:</b> Gegenstand im Inventar anklicken, dann auf einen zweiten Gegenstand oder ein Objekt klicken (z. B. <i>Benutze Seil mit Eimer</i>).</li>
+  <li><b>Geben:</b> <code>Gib</code> + Gegenstand + Person.</li>
+  <li><b>Nahaufnahme:</b> Das Würstchengulasch-Denkmal auf dem Dorfplatz zeigt beim Betrachten die Geheimzahl.</li>
+  <li><b>Sackgassen:</b> Es gibt keine. Verbrauchte Gegenstände ersetzt das Spiel nicht, aber alles, was Sie brauchen, ist erreichbar. Nur den Brief müssen Sie vor dem Verlassen des Hauses mitnehmen.</li>
+  <li><b>Falsche Gegenstände:</b> Figuren werden mit jedem Fehlversuch ungehaltener. Es kostet nichts, probieren Sie es ruhig aus.</li>
+  <li><b>Den Hüter</b> können Sie fragen, aber er verrät nichts („Königtum muss man sich verdienen.“).</li>
+</ul>
+
+<!-- ============================================================ -->
+<h2 id="a1">[1] DAS HEIMATDORF</h2>
+
+<h3>1.1 Schlafzimmer</h3>
+<ol>
+  <li><code>Benutze</code> den <span class="item">Wecker</span> auf dem Nachttisch (er muss aus sein, sonst kommen Sie nicht zur Tür).</li>
+  <li><code>Nimm</code> den <span class="item">Kugelschreiber</span> auf dem Schreibtisch (brauchen Sie später am Empfang).</li>
+  <li><code>Öffne</code> die <b>Schublade</b> am Schreibtisch: <span class="item">Kaugummi</span>.</li>
+  <li><code>Nimm</code> den <span class="item">Brief</span> auf dem Schreibtisch: darin steckt das erste <span class="item">TOP-SECRET-Ticket</span>.</li>
+  <li>Das <b>Smartphone</b> lassen Sie liegen (es kommt erst am Ende wieder vor).</li>
+  <li>Durch die Tür rechts in den Hausflur.</li>
+</ol>
+<p class="opt">Später: Das <span class="item">Familienrezept</span> erscheint erst nach dem Hinweis des Würstchenbudenbetreibers <b>unter dem Bett</b> (siehe 1.4).</p>
+
+<h3>1.2 Hausflur</h3>
+<ol>
+  <li><code>Benutze</code> das <b>Schuhregal</b>: <span class="item">Haustürschlüssel</span>.</li>
+  <li><code>Benutze Schlüssel mit Haustür</code>.</li>
+  <li>Die Haustür führt zum Dorfplatz. Haben Sie den Brief nicht dabei, hält Samuel Sie auf: „Da war doch noch etwas in meinem Zimmer …“</li>
+</ol>
+
+<h3>1.3 Dorfplatz (erster Besuch)</h3>
+<p>Alles Aufnehmbare ist eigenständig im Bild zu sehen:</p>
+<ul>
+  <li><span class="item">Büroklammer</span> am Anschlagbrett (wird zur <i>aufgebogenen Büroklammer</i>)</li>
+  <li><span class="item">Alte Zeitung</span> auf der Bank</li>
+  <li><span class="item">Drahtstück</span> neben dem Mülleimer</li>
+  <li><span class="item">Kieselstein</span> beim Denkmal</li>
+</ul>
+<div class="tip"><b>Tipp:</b> <code>Betrachte</code> das <b>Denkmal</b>: In der Nahaufnahme steht die Geheimzahl <code>1234</code>. Merken Sie sie, Sie brauchen sie im Archiv.</div>
+<p><b>Jens</b> (Rede mit): <i>„Brauchst du was?“</i> – er gibt Ihnen einen <span class="item">Eimer</span> und möchte Wasser.</p>
+
+<h3>1.4 Würstchenbude</h3>
+<ol>
+  <li>Betreiber: <i>„Kann ich was probieren?“</i> – Sie bekommen den <span class="item">Rest des Experiments</span>.</li>
+  <li>Betreiber: <i>„Haben Sie ein Seil?“</i> (erst möglich, wenn Sie den Eimer von Jens haben) – er will das <b>Familienrezept</b>.</li>
+  <li>Zurück ins <b>Schlafzimmer</b>: <code>Nimm</code> das <span class="item">Familienrezept</span> unter dem Bett.</li>
+  <li><code>Gib Familienrezept an Betreiber</code>: Sie erhalten das <span class="item">Seil</span>.</li>
+</ol>
+
+<h3>1.5 Wasser für Jens</h3>
+<ol>
+  <li><code>Benutze Seil mit Eimer</code> → <span class="item">Eimer mit Seil</span>.</li>
+  <li><code>Benutze Eimer mit Seil</code> auf den <b>Brunnen</b> (links vom Würstchenstand) → <span class="item">Eimer mit Wasser</span>.</li>
+  <li><code>Gib Eimer mit Wasser an Jens</code> → <span class="item">Kugelschreibermine</span>.</li>
+  <li>Nun taucht der <b>Hüter</b> auf, rätselt über „das Zeichen unserer Organisation“ und verschwindet. Auf dem Dorfplatz leuchtet jetzt der <b>geheime Eingang</b> (Neonschild rechts).</li>
+</ol>
+
+<h3>1.6 Dorfkneipe</h3>
+<ul>
+  <li><span class="item">Streichholzschachtel</span> auf dem Tresen</li>
+  <li><span class="item">Löffel</span> auf dem Teller</li>
+  <li><span class="item">Fettige Serviette</span> am Tischende links</li>
+  <li><code>Benutze</code> die <b>Tagesangebot-Tafel</b>: dahinter klemmt ein <span class="item">Ticket</span> (Nr. 2).</li>
+</ul>
+<p>Der <b>Wirt</b> hat Klebstoff, will dafür aber „etwas Praktisches“. Geben Sie ihm später den <span class="item">Gummihandschuh</span> aus dem Empfang (siehe 2.2). Falsche Gegenstände machen ihn immer fieser.</p>
+
+<!-- ============================================================ -->
+<h2 id="a2">[2] DIE GEHEIMDIENSTZENTRALE</h2>
+
+<h3>2.1 Getarnter Eingang</h3>
+<p>Dorfplatz rechts: das Neonschild. Jens blockiert die Sicherheitstür, drei Schalter A, B, C.</p>
+<ol>
+  <li>Sprechen Sie mit <b>Jens</b>: <i>„Wie komme ich hier rein?“</i> – er stellt das Rätsel.</li>
+  <li><b>Lösung: Schalter C.</b><br>
+      Genau eine Aussage ist wahr: A („Der richtige ist B“) ist falsch, B („A ist falsch“) ist wahr, C („Ich bin nicht der richtige“) ist falsch. Würde B stimmen, wäre B richtig, dann wären aber zwei Aussagen wahr. Also: <b>C</b>.</li>
+  <li>Schalter A oder B: <b>Stromschlag</b> (harmlos, aber Jens kommentiert).</li>
+</ol>
+
+<h3>2.2 Empfang</h3>
+<ul>
+  <li><b>Putzschrank</b> öffnen: <span class="item">Gummihandschuh</span></li>
+  <li><b>Schublade</b> am Schreibtisch: <span class="item">Klebeband</span> und <span class="item">Batterie</span></li>
+  <li><span class="item">Lupe</span>, <span class="item">Büroklammer</span> (die zweite), <span class="item">Notizzettel</span> vom Schreibtisch</li>
+  <li><code>Gib Kugelschreiber an Empfangsmitarbeiter</code>: er füllt das Formular aus, die Sicherheitstür ist frei.</li>
+  <li><b>Agent</b>: löst Tickets ein (siehe Abschnitt 7).</li>
+</ul>
+<div class="tip"><b>Tipp:</b> <code>Benutze Batterie mit Büroklammer</code> ergibt die <span class="item">Batterie mit Büroklammer</span>. Die brauchen Sie in Dillinaland.</div>
+
+<h3>2.3 Einsatzzentrale</h3>
+<ol>
+  <li>Der <b>Hüter</b> erklärt Ihre Bestimmung („König von Würstchengulaschland und König über den Dill im Teich“).</li>
+  <li><code>Benutze</code> den <b>Aktenvernichter</b>: <span class="item">Ausweisteile</span>.</li>
+  <li>Wirt in der Dorfkneipe: <code>Gib Gummihandschuh an Wirt</code> → <span class="item">Klebstoff</span>.</li>
+  <li><code>Benutze Klebstoff mit Ausweisteile</code> → <span class="item">Reparierter Ausweis</span>.</li>
+  <li><b>Archivtür</b> (links an der Wand): Ausweis, dann PIN <code>1234</code>.</li>
+</ol>
+<p class="opt">Drei Agenten laufen hier hin und her; Hüter-Bettel-Dialog: „Sag mir die Lösung“ (einmalig, Ergebnis: „Definitiv, definitiv Nein!“).</p>
+
+<h3>2.4 Geheimarchiv</h3>
+<ul>
+  <li><code>Benutze</code> den <b>Papierstapel</b> rechts: <span class="item">Ticket</span> (Nr. 3).</li>
+  <li>Die Akten geben Hinweise (Bierdeckel &amp; Genehmigung in Dillinaland, Senfsumpf nur mit Stiefeln, „Der Hüter dient dem Dill“).</li>
+  <li>Die <b>Kiste</b> mit dem Demotape bleibt verschlossen (Running Gag).</li>
+</ul>
+
+<h3>2.5 Technisches Labor</h3>
+<p>Hier steht <b>Elana</b> mit ihrer Maschine. Erst einmal reden und schauen; gebaut wird sie in <a href="#a5">Abschnitt 5</a>.</p>
+
+<!-- ============================================================ -->
+<h2 id="a3">[3] DILLINALAND</h2>
+
+<h3>3.1 Grenzübergang (Dorfplatz links)</h3>
+<ol>
+  <li>Der <b>Grenzbeamte</b> verlangt drei Dinge: <span class="item">Löffel</span>, <span class="item">Alte Zeitung</span>, <span class="item">Notizzettel</span>.<br>
+      <code>Gib Löffel an Beamten</code> (prüft alles auf einmal), oder fragen Sie ihn und wählen <i>„Hier sind meine Sachen“</i>.</li>
+  <li>Danach geht der Schlagbaum hoch. <code>Nimm</code> jetzt den <span class="item">Schwamm</span> am Wegrand (vorher wird er mit eingezogen).</li>
+  <li><code>Benutze Batterie mit Büroklammer</code> auf die <b>Glühbirne</b> am Häuschen: sie leuchtet. (Wichtig, siehe Thronsaal.)</li>
+</ol>
+
+<h3>3.2 Marktplatz</h3>
+<ol>
+  <li><code>Benutze</code> den <b>Zierbrunnen</b>: <span class="item">Geld</span>.</li>
+  <li><code>Gib Geld an Trödelhändler</code> → <span class="item">Genehmigung</span> („auf Atanas Multimillionär, Präsident von Hannover“).</li>
+  <li><code>Benutze</code> die <b>Kiste</b> am Trödelstand: <span class="item">Ticket</span> (Nr. 4).</li>
+  <li><b>Königsdill-Händler</b>: will seinen Bierdeckel zurück (liegt in Janas Geheimzimmer). Dann: <code>Benutze Bierdeckel mit Standbein</code> → <span class="item">Königsdill</span>.</li>
+  <li><b>Jens und die Socke:</b> Rede mit Jens: <i>„Was machst du hier?“</i> – Frage den Gewürzhändler (<i>„Haben Sie jemanden, der zu Hause auf Sie wartet?“</i>). Dann zu Jens: <i>„Er hat nichts gesagt.“</i> → <span class="item">Löchrige Socke</span>.</li>
+  <li><b>Janne</b> bläst Seifenblasen und ignoriert Sie. Das ist so.</li>
+</ol>
+
+<h3>3.3 Schlossvorhof</h3>
+<ol>
+  <li><code>Gib Genehmigung an Wache</code> (die ohne Zahnschmerzen, die mit den verschränkten Armen). Das Tor zum Thronsaal ist frei.</li>
+  <li><span class="item">Rote Feder</span> auf der Steinbank, <span class="item">Kleine Glasflasche</span> auf der Mauer.</li>
+  <li><code>Benutze aufgebogene Büroklammer</code> auf die <b>Jana-Statue</b>: Klappe öffnet sich, Zettel mit <code>5678</code>.</li>
+  <li>Der <b>Briefkasten</b> hat eine Mausefalle („Beschwerden sind hier nicht willkommen“).</li>
+</ol>
+
+<h3>3.4 Thronsaal: Jana und Janne loswerden</h3>
+<ol>
+  <li><b>Jana</b>: <i>„Warum brennen hier überall Fackeln?“</i> – sie erwähnt, dass das Grenzhäuschen keinen Strom hat (Voraussetzung: Glühbirne leuchtet, siehe 3.1).</li>
+  <li><b>Janne</b>: <i>„Auf dem Marktplatz gibt es die größte Seifenblase der Welt.“</i> Sie rennt los.</li>
+  <li>Verlassen Sie den Thronsaal und kehren Sie zurück: Ein Bote meldet das elektrische Licht, Jana verlässt den Saal.</li>
+  <li><b>Geheimtür</b> hinter dem Thron: Zahl <code>5678</code>.</li>
+</ol>
+<div class="tip"><b>Tipp:</b> Bei den Jana-Dialogen sind <i>„Hast du eine Kreditkarte?“</i> und <i>„Wie reich bist du eigentlich?“</i> Pflicht für Fans.</div>
+
+<h3>3.5 Janas Geheimzimmer</h3>
+<ul>
+  <li><span class="item">Bierdeckel</span> (zurück zum Dill-Händler)</li>
+  <li><span class="item">Gummistiefel</span> (für den Senfsumpf)</li>
+  <li><span class="item">Gurkenessenz</span> (Zutat für Elana)</li>
+  <li><span class="item">Janas Tagebuch</span>: lesen (<code>Nimm</code>/<code>Benutze</code>) schaltet den <b>Senfsumpf</b> frei.</li>
+  <li><b>Papierstapel</b>: <span class="item">Ticket</span> (Nr. 5).</li>
+</ul>
+
+<!-- ============================================================ -->
+<h2 id="a4">[4] DER SENFWALD</h2>
+
+<h3>4.1 Waldeingang (Dorfplatz oben rechts)</h3>
+<p><b>Waldwächter Horst</b>: Sein Alarmsystem ist kaputt. Geben Sie ihm einzeln:</p>
+<ul>
+  <li><span class="item">Drahtstück</span> (Leitung)</li>
+  <li><span class="item">Löchrige Socke</span> (Glocke dämpfen)</li>
+  <li><span class="item">Rest des Experiments</span> (schmiert das Scharnier)</li>
+</ul>
+<p>Danach lässt er Sie durch den Waldpfad zur Lichtung.</p>
+
+<h3>4.2 Lichtung</h3>
+<ul>
+  <li><code>Benutze Kieselstein mit zerbrochenem Fenster</code> der <b>alten Hütte</b>: Die Tür springt auf.</li>
+  <li>Das <b>Haus der Trolle</b> (rechts) ist begehbar (siehe 4.4).</li>
+  <li>Jens steht hier und redet über Karsten und Schlag den Raab. Kein Rätsel.</li>
+</ul>
+
+<h3>4.3 Alte Waldhütte</h3>
+<ol>
+  <li><code>Benutze Lupe mit Brief</code>: „Im Senfsumpf kann man Senfsaat bekommen.“</li>
+  <li><code>Benutze Klebeband mit Jukebox</code>: repariert. Danach <code>Benutze Jukebox</code> für <b>zehn Lieder</b> (Raummusik pausiert).</li>
+  <li>Im Jukebox-Menü <i>„Hinter die Jukebox schauen“</i> (oder <code>Drücke</code> die Jukebox): <span class="item">Ticket</span> (Nr. 6).</li>
+  <li>Der <span class="item">Kieselstein</span> liegt nach dem Wurf wieder in der Hütte (rechts im Bild, vor der Jukebox). Aufheben, Sie brauchen ihn für Jens im Tempel.</li>
+</ol>
+
+<h3>4.4 Haus der Trolle</h3>
+<p>Die Szene läuft einmal von allein: Mutter Troll („Setz disch! Et wird Suppe jejessen.“) und das Trollkind, das die Suppe vom Balkon kippt. Samuel steht dabei links draußen.</p>
+<ol>
+  <li>Auf dem Boden vor dem Haus liegt die <b>Suppenpfütze</b>. Ohne Schwamm: „Ich glaube, ich verzichte darauf …“</li>
+  <li><code>Benutze Schwamm mit Pfütze</code> → <span class="item">Schwamm mit Trollsuppe</span>.</li>
+</ol>
+
+<h3>4.5 Senfsumpf</h3>
+<p>Zugang nur, wenn Sie <b>Janas Tagebuch gelesen</b> haben und die <b>Gummistiefel</b> dabei sind (Pfad rechts von Lichtung/Trollhaus).</p>
+<ol>
+  <li><code>Nimm</code> die <b>Senfpflanze</b> rechts: <span class="item">Senfsaat</span>. Die Stiefel laufen voll, aus ihnen wird <span class="item">Gummistiefel voller Sumpfschmock</span>.</li>
+  <li>Der <b>Hüter</b> taucht auf und schickt Sie zu Elana.</li>
+  <li><span class="opt">Optional:</span> Jens’ Meme-Quiz im Sumpf („Habicht hat zwei H“, „Sandra Bullogs“). Keine Belohnung.</li>
+</ol>
+
+<!-- ============================================================ -->
+<h2 id="a5">[5] ELANAS MASCHINE</h2>
+<p>Zurück ins <b>Technische Labor</b>. Die Maschine braucht drei Voraussetzungen und fünf Zutaten:</p>
+<table>
+  <tr><th>Schritt</th><th>Aktion</th></tr>
+  <tr><td>1. Schlauch abdichten</td><td><code>Benutze Kaugummi mit Schlauch</code></td></tr>
+  <tr><td>2. Feuer</td><td><code>Benutze Streichhölzer mit Brenner</code> (Streichhölzer <u>und</u> fettige Serviette müssen im Inventar sein, beides wird verbraucht)</td></tr>
+  <tr><td>3. Trollsuppe</td><td><code>Benutze Schwamm mit Trollsuppe mit Trichter</code></td></tr>
+  <tr><td>4. Sumpfschmock</td><td><code>Benutze Gummistiefel voller Sumpfschmock mit Trichter</code></td></tr>
+  <tr><td>5. Königsdill</td><td><code>Benutze Königsdill mit Trichter</code></td></tr>
+  <tr><td>6. Gurkenessenz</td><td><code>Benutze Gurkenessenz mit Trichter</code> (Elana: „Dreh die Dose um.“)</td></tr>
+  <tr><td>7. Senfsaat</td><td><code>Benutze Senfsaat mit Trichter</code></td></tr>
+  <tr><td>8. Flasche</td><td><code>Benutze Kleine Glasflasche mit Auslauf</code></td></tr>
+  <tr><td>9. Start</td><td><code>Benutze Kugelschreibermine mit Startschalter</code></td></tr>
+</table>
+<div class="tip"><b>Tipp:</b> Die Reihenfolge der Zutaten ist egal. Wer zu früh startet (ohne Flasche), sieht das Elixier auf den Boden laufen. Elana sagt: „Das war genau so geplant.“ Nichts geht verloren, probieren Sie einfach nochmal.</div>
+<p>Ergebnis: das <span class="item">Elixier</span> in der kleinen Glasflasche.</p>
+
+<!-- ============================================================ -->
+<h2 id="a6">[6] DER HEILIGE TEICH &amp; DAS FINALE</h2>
+
+<h3>6.1 Uferweg (Senfsumpf rechts)</h3>
+<ol>
+  <li><code>Nimm</code> den <span class="item">Ast</span> auf dem Weg (links im Bild).</li>
+  <li>Der <b>Wächter</b> am Schlagbaum: Fragen Sie nach einer Ausnahme (<i>„Zuwendungen“</i>), dann <code>Gib Rote Feder an Wächter</code>. Weg zum Tempel frei.</li>
+  <li><b>Jana</b> taucht auf, sobald Sie dem Königsdill-Händler den Bierdeckel gebracht haben, und fragt, wo er ist. Wahrheit oder Lüge, es ist egal.</li>
+</ol>
+
+<h3>6.2 Dilltempel</h3>
+<ul>
+  <li><b>Fünf Fresken</b> (Betrachte): Dill im Teich, nur ein Auserwählter, der Hüter wacht, „Der Dill sieht alles …“, ein beschädigtes Fragment („… und er erwacht“).</li>
+  <li><b>Jens-Quest (optional):</b> <code>Gib Kieselstein an Jens</code>, dann holen Sie beim Würstchenbudenbetreiber eine zweite Kostprobe (<i>„Gibt es noch eine Kostprobe? Für einen Freund.“</i>) und geben sie Jens → <span class="item">Leeres Orangensaft-Tetrapak</span> (Mülleimer zu weit weg).</li>
+  <li>Die kleine <b>Tür hinter dem Altar</b> führt in die Kultkammer. Sie öffnet sich nur, wenn Sie das <span class="item">Elixier</span> dabei haben.</li>
+</ul>
+
+<h3>6.3 Geheime Kultkammer</h3>
+<ol>
+  <li>Der <b>Hüter</b> wartet („Schütte das Elixier in das Gefäß … dann wird er zum König gekrönt.“ – Wer ist „er“? Er sagt es nicht.)</li>
+  <li><code>Benutze Elixier mit Gefäß</code>: Es passiert nichts.</li>
+  <li><code>Benutze Ast mit Gefäß</code>: Das Elixier rutscht tiefer, der Raum leuchtet.</li>
+</ol>
+
+<h3>6.4 Thron des Dills: Krönung und Verrat</h3>
+<p>Ab hier läuft alles von allein. Samuel (jetzt als König) hält seine Rede, die Menge jubelt, dann bröckelt die Statue. Der Hüter enthüllt: <i>„Ich habe dir nie gedient.“</i> Der Dill steigt aus der Statue, läuft zum Thron und setzt sich. „ES BEGINNT!“ – „NEEEEEEEEEIN!“</p>
+
+<!-- ============================================================ -->
+<h2 id="a7">[7] DIE SECHS TICKETS</h2>
+<p>Ein Ticket beim <b>Agenten</b> im Empfang einlösen (Rede mit oder <code>Gib Ticket</code>): Beim ersten Mal bekommen Sie einen Hinweis, beim zweiten zum selben Rätsel die Lösung. Der Agent ist dabei spöttisch („Oh ja, großer weiser König …“). Der Hüter nimmt keine Tickets („Dafür ist meine Gehaltsklasse zu hoch.“).</p>
+<div class="scroll">
+<table>
+  <tr><th>#</th><th>Fundort</th><th>Wie</th></tr>
+  <tr><td>1</td><td>Schlafzimmer</td><td>Brief auf dem Schreibtisch nehmen</td></tr>
+  <tr><td>2</td><td>Dorfkneipe</td><td>hinter der Tagesangebot-Tafel (Benutze)</td></tr>
+  <tr><td>3</td><td>Geheimarchiv</td><td>Papierstapel (Benutze)</td></tr>
+  <tr><td>4</td><td>Marktplatz Dillinaland</td><td>Kiste am Trödelstand (Benutze)</td></tr>
+  <tr><td>5</td><td>Janas Geheimzimmer</td><td>Papierstapel (Benutze)</td></tr>
+  <tr><td>6</td><td>Waldhütte</td><td>hinter der Jukebox (nach der Reparatur)</td></tr>
+</table>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="a8">[8] GEGENSTÄNDE AUF EINEN BLICK</h2>
+<div class="scroll">
+<table>
+  <tr><th>Gegenstand</th><th>Fundort</th><th>Verwendung</th></tr>
+  <tr><td>Kugelschreiber</td><td>Schlafzimmer</td><td>Empfang: Formular</td></tr>
+  <tr><td>Kaugummi</td><td>Schlafzimmer (Schublade)</td><td>Elanas Schlauch</td></tr>
+  <tr><td>Brief / Ticket</td><td>Schlafzimmer</td><td>Agent</td></tr>
+  <tr><td>Haustürschlüssel</td><td>Hausflur (Schuhregal)</td><td>Haustür</td></tr>
+  <tr><td>Aufgebogene Büroklammer</td><td>Dorfplatz (Anschlagbrett)</td><td>Jana-Statue</td></tr>
+  <tr><td>Alte Zeitung</td><td>Dorfplatz (Bank)</td><td>Grenzbeamter</td></tr>
+  <tr><td>Drahtstück</td><td>Dorfplatz (Mülleimer)</td><td>Waldwächter Horst</td></tr>
+  <tr><td>Kieselstein</td><td>Dorfplatz</td><td>Hüttenfenster; später Jens im Tempel</td></tr>
+  <tr><td>Eimer</td><td>Jens (Dorfplatz)</td><td>Brunnen, Wasser für Jens</td></tr>
+  <tr><td>Rest des Experiments</td><td>Würstchenbude</td><td>Waldwächter Horst; Kostprobe 2 für Jens</td></tr>
+  <tr><td>Familienrezept</td><td>Schlafzimmer (unter dem Bett)</td><td>Tausch gegen Seil</td></tr>
+  <tr><td>Seil</td><td>Würstchenbude</td><td>Brunnen</td></tr>
+  <tr><td>Kugelschreibermine</td><td>Jens (Belohnung)</td><td>Startschalter der Maschine</td></tr>
+  <tr><td>Streichhölzer, Serviette</td><td>Dorfkneipe</td><td>Brenner der Maschine</td></tr>
+  <tr><td>Löffel</td><td>Dorfkneipe</td><td>Grenzbeamter</td></tr>
+  <tr><td>Gummihandschuh</td><td>Empfang (Putzschrank)</td><td>Wirt → Klebstoff</td></tr>
+  <tr><td>Klebstoff</td><td>Wirt</td><td>Ausweis reparieren</td></tr>
+  <tr><td>Klebeband</td><td>Empfang (Schublade)</td><td>Jukebox</td></tr>
+  <tr><td>Batterie + Büroklammer (2.)</td><td>Empfang</td><td>Glühbirne am Grenzhäuschen</td></tr>
+  <tr><td>Lupe</td><td>Empfang</td><td>Brief in der Waldhütte</td></tr>
+  <tr><td>Notizzettel</td><td>Empfang</td><td>Grenzbeamter</td></tr>
+  <tr><td>Ausweisteile / Ausweis</td><td>Aktenvernichter</td><td>Archivtür (mit PIN 1234)</td></tr>
+  <tr><td>Schwamm</td><td>Grenzübergang</td><td>Trollsuppe aufnehmen</td></tr>
+  <tr><td>Geld</td><td>Zierbrunnen Marktplatz</td><td>Genehmigung</td></tr>
+  <tr><td>Genehmigung</td><td>Trödelhändler</td><td>Wache im Schlossvorhof</td></tr>
+  <tr><td>Rote Feder</td><td>Schlossvorhof</td><td>Wächter am Uferweg</td></tr>
+  <tr><td>Kleine Glasflasche</td><td>Schlossvorhof</td><td>Auslauf der Maschine</td></tr>
+  <tr><td>Zettel 5678</td><td>Jana-Statue</td><td>Geheimtür im Thronsaal</td></tr>
+  <tr><td>Bierdeckel</td><td>Janas Geheimzimmer</td><td>Königsdill-Händler (Standbein)</td></tr>
+  <tr><td>Königsdill</td><td>Marktplatz (Händler)</td><td>Maschine</td></tr>
+  <tr><td>Gurkenessenz</td><td>Janas Geheimzimmer</td><td>Maschine</td></tr>
+  <tr><td>Gummistiefel</td><td>Janas Geheimzimmer</td><td>Senfsumpf betreten</td></tr>
+  <tr><td>Löchrige Socke</td><td>Jens (Marktplatz-Quest)</td><td>Waldwächter Horst</td></tr>
+  <tr><td>Senfsaat, Sumpfschmock</td><td>Senfsumpf</td><td>Maschine</td></tr>
+  <tr><td>Schwamm mit Trollsuppe</td><td>Haus der Trolle</td><td>Maschine</td></tr>
+  <tr><td>Elixier</td><td>Maschine</td><td>Kultkammer</td></tr>
+  <tr><td>Ast</td><td>Uferweg</td><td>Gefäß in der Kultkammer</td></tr>
+</table>
+</div>
+<p class="opt">Ohne Verwendung (reine Gags): Leeres Orangensaft-Tetrapak.</p>
+
+<!-- ============================================================ -->
+<h2 id="a9">[9] JENS-NEBENQUESTS &amp; GAGS</h2>
+<ul>
+  <li><b>Jens taucht überall auf</b>, auch dort, wo er nichts zu suchen hat. Er wird nie erklärt.</li>
+  <li><b>Einmaliger Auftritt:</b> Irgendwann läuft er in ein Bild und sagt: „Na hast du auch soviel Spaß wie ich? I daut it.“ – und geht.</li>
+  <li><b>Wasserquest</b> (Dorfplatz): Pflicht, gibt die Mine.</li>
+  <li><b>Gewürzhändler</b> (Marktplatz): Pflicht, gibt die Socke.</li>
+  <li><b>Meme-Quiz</b> (Senfsumpf): optional, nur Ruhm.</li>
+  <li><b>Kiesel- und Experiment-Quest</b> (Tempel): optional, Tetrapak.</li>
+  <li><b>Dialog-Gags:</b> Hüter bettelt („Bitte bitte“ – „Definitiv, definitiv Nein!“), Jana und die Kreditkarte („meine auch, aber mit Platin“), Janne („Ich bin Janne und ich bin auch dabei.“), Kneipe: „Cola Zero“.</li>
+  <li><b>Jukebox:</b> Zehn Lieder, darunter „Habicht hat zwei H“ und „Et wird Suppe jejessen“.</li>
+</ul>
+
+<!-- ============================================================ -->
+<h2 id="a10">[10] HÄUFIGE FRAGEN</h2>
+<p><b>Ich komme aus dem Schlafzimmer nicht raus.</b> Wecker ausschalten (Benutze).</p>
+<p><b>Die Haustür geht nicht auf.</b> Der Schlüssel steckt in einem Schuh am Schuhregal. Danach <i>Benutze Schlüssel mit Haustür</i>. Und: Brief mitnehmen.</p>
+<p><b>Ich finde den geheimen Eingang nicht.</b> Er erscheint erst, wenn Brief, Rezept-Tausch und Wasserquest erledigt sind (der Hüter taucht dann auf dem Dorfplatz auf).</p>
+<p><b>Die Archivtür bleibt zu.</b> Reparierter Ausweis <u>und</u> PIN <code>1234</code> (Nahaufnahme am Denkmal).</p>
+<p><b>Ich komme nicht über die Grenze.</b> Löffel, Alte Zeitung, Notizzettel. Alle drei im Inventar, dann dem Beamten geben.</p>
+<p><b>Der Senfsumpf ist nicht begehbar.</b> Tagebuch in Janas Geheimzimmer lesen, Gummistiefel einstecken.</p>
+<p><b>Jana geht nicht aus dem Thronsaal.</b> Sie müssen vorher ihre Fackel-Frage stellen, die Glühbirne am Grenzhäuschen anschließen und Janne weggeschickt haben. Dann beim nächsten Betreten kommt der Bote.</p>
+<p><b>Der Wächter am Uferweg lässt mich nicht durch.</b> Rote Feder (liegt im Schlossvorhof).</p>
+<p><b>Die Kultkammer-Tür geht nicht auf.</b> Sie müssen das Elixier dabei haben.</p>
+<p><b>Nichts passiert, wenn ich das Elixier ins Gefäß schütte.</b> Das ist richtig. Dann den Ast verwenden.</p>
+
+<!-- ============================================================ -->
+<h2 id="a11">[11] DAS ENDE &amp; DIE LATEINARBEIT</h2>
+<p>Nach dem Schrei: Samuel öffnet die Augen im Schlafzimmer („Es war nur ein Traum“), das Smartphone zeigt <b>HEUTE: LATEINARBEIT, 08:00 Uhr, Raum 204, noch 35 Minuten</b>. Sein letzter Gedanke: <i>„Ich hätte König bleiben sollen.“</i> Dann <b>ENDE</b>.</p>
+<p>Auf dem Endbildschirm können Sie wählen:</p>
+<ul>
+  <li><b>Ende:</b> Das Spiel ist vorbei.</li>
+  <li><b>Weiter?:</b> Die Lateinaufgabe. Oben ein lateinischer Text, unten lose Wortkarten (Garten, Apfel, Freund, Knabe, Lehrer, Haus, Schule, Mädchen, Stadt, Liebe, Buch, Spiel).<br>
+      Es gibt <b>keine richtige Lösung</b>. Legen Sie ein paar Wörter zusammen und klicken Sie <b>„Abgeben“</b>. Ergebnis: <b>„Note: 6 – Thema verfehlt.“</b></li>
+</ul>
+
+<div class="footer">
+  <p>Würstchengulaschland – Das Spiel. Komplettlösung v1.0.</p>
+  <p>Der Dill sieht alles. Der Dill weiß alles. Der Dill ist überall.</p>
+  <p>Diese Lösung gibt den Spielstand wieder, wie er beim Schreiben im Spiel umgesetzt war. Kleine Abweichungen sind möglich.</p>
+</div>
+
+</div>
+</body>
+</html>
